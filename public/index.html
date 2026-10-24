@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparador de supermercados</title>
+  <meta name="description" content="¿En qué supermercado sale más barata tu canasta? Precio por producto y total por tienda.">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-in">
+      <span class="eyebrow" data-t="eyebrow"></span>
+      <div class="lang" role="group" aria-label="Idioma / Language">
+        <button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro">
+      <h1 data-t="title"></h1>
+      <p class="lede" data-t="lede"></p>
+    </section>
+
+    <div class="grid">
+      <section class="panel basket" aria-labelledby="basket-title">
+        <h2 id="basket-title" data-t="basket"></h2>
+        <div class="search">
+          <input id="q" type="search" autocomplete="off" data-t-placeholder="search">
+          <ul id="results" class="results" hidden></ul>
+        </div>
+        <ul id="items" class="items"></ul>
+        <p id="empty" class="dim" data-t="empty" hidden></p>
+      </section>
+
+      <section class="output" aria-live="polite">
+        <p id="sample" class="note" data-t="sample" hidden></p>
+        <p id="error" class="error" hidden></p>
+        <div id="summary"></div>
+        <div class="table-wrap"><table id="matrix" class="tabla"></table></div>
+        <p class="dim" data-t="price_note"></p>
+        <p id="source" class="source"></p>
+      </section>
+    </div>
+  </main>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>

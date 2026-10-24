@@ -1,0 +1,83 @@
+/* Sistema visual de la marca: verde pino para la estructura, salmón para lo más barato. Sin cursivas. */
+@font-face { font-family: "Host Grotesk"; font-weight: 300 800; font-display: swap; src: url(fonts/host-grotesk-latin.woff2) format("woff2"); }
+@font-face { font-family: "Geist Mono"; font-weight: 100 900; font-display: swap; src: url(fonts/geist-mono-latin.woff2) format("woff2"); }
+
+:root {
+  --ink: #0f2a22; --text: #24392f; --muted: #4b6056; --dim: #51665c;
+  --bg: #ffffff; --bg2: #f2f6f4; --line: #dfe8e3; --line2: #c6d3cc;
+  --primario: #0f5a45; --primario-soft: #e3efe9; --canto-sombra: #0a4031;
+  --accent: #ff8a6b; --accent-soft: #ffeee8; --accent-ink: #b0401f;
+  --warn: #8a4b00; --warn-soft: #fdf1dc; --error: #b42318; --error-soft: #fdecea;
+  --sans: "Host Grotesk", system-ui, sans-serif; --mono: "Geist Mono", ui-monospace, monospace;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-style: normal; }
+html { font-synthesis: none; -webkit-font-smoothing: antialiased; }
+body { font: 16px/1.5 var(--sans); color: var(--text); background: var(--bg2); }
+button, input { font: inherit; color: inherit; }
+button { background: none; border: 0; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--primario); outline-offset: 2px; border-radius: 4px; }
+
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+.top { background: var(--bg); border-bottom: 1px solid var(--line); }
+.top-in { display: flex; justify-content: space-between; align-items: center; height: 56px; }
+.eyebrow { font: 11.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.lang { display: flex; border: 1px solid var(--line2); border-radius: 6px; overflow: hidden; font: 12px var(--mono); }
+.lang button { padding: 6px 10px; color: var(--muted); }
+.lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+
+.intro { padding: 48px 0 32px; max-width: 760px; }
+h1 { font-size: clamp(32px, 4.4vw, 52px); line-height: 1.04; letter-spacing: -0.04em; color: var(--ink); font-weight: 700; }
+.lede { margin-top: 14px; font-size: 18px; color: var(--muted); }
+h2 { font-size: 18px; letter-spacing: -0.02em; color: var(--ink); }
+.dim { color: var(--dim); font: 12.5px var(--mono); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+
+.grid { display: grid; grid-template-columns: 340px 1fr; gap: 28px; align-items: start; padding-bottom: 64px; }
+@media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+.panel { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 14px; }
+
+.search { position: relative; }
+.search input { width: 100%; padding: 11px 14px; border: 1px solid #7a8e85; border-radius: 6px; background: var(--bg); }
+.results { position: absolute; z-index: 5; top: calc(100% + 6px); left: 0; right: 0; list-style: none; background: var(--bg);
+  border: 1px solid var(--line2); border-radius: 10px; box-shadow: 0 12px 32px rgba(15, 42, 34, .12); overflow: hidden; }
+.results button { width: 100%; text-align: left; padding: 10px 14px; display: grid; gap: 2px; border-bottom: 1px solid var(--line); }
+.results button:hover, .results button:focus-visible { background: var(--bg2); }
+
+.items { list-style: none; display: grid; }
+.items li { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.items .name { color: var(--ink); }
+.qty { display: flex; align-items: center; gap: 4px; font-family: var(--mono); }
+.qty b { min-width: 22px; text-align: center; font-weight: 500; }
+.qty button { width: 26px; height: 26px; border: 1px solid var(--line2); border-radius: 6px; line-height: 1; }
+.qty button:hover { border-color: var(--ink); }
+.qty .remove { border-color: transparent; color: var(--dim); }
+
+.output { display: grid; gap: 20px; min-width: 0; }
+.note { font: 12.5px var(--mono); color: var(--warn); background: var(--warn-soft); padding: 8px 12px; border-radius: 6px; }
+.error { color: var(--error); background: var(--error-soft); padding: 10px 14px; border-radius: 6px; }
+
+/* La ficha ganadora: bloque con canto verde, como las fichas de producto de la marca. */
+.winner { background: var(--bg); border: 1px solid var(--line2); border-radius: 3px; padding: 18px 20px; display: grid; gap: 6px;
+  box-shadow: 3px 3px 0 var(--primario), 6px 6px 0 var(--canto-sombra); margin-bottom: 22px; }
+.winner-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.winner-row b { font-size: 26px; letter-spacing: -0.03em; color: var(--ink); font-weight: 650; }
+.big { font: 500 34px var(--mono); letter-spacing: -0.03em; color: var(--ink); }
+
+.bars { list-style: none; display: grid; gap: 8px; }
+.bars li { display: grid; grid-template-columns: 120px 1fr 96px 130px; align-items: center; gap: 12px; font-size: 14.5px; }
+.bar { height: 10px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.bar span { display: block; height: 100%; background: var(--primario); border-radius: 999px; }
+.bars li.best .bar span { background: var(--accent); }
+.bars li.incomplete .bar span { background: var(--line2); }
+.bars li.incomplete { color: var(--dim); }
+.split { margin-top: 14px; font: 13px var(--mono); color: var(--muted); }
+
+.table-wrap { overflow-x: auto; background: var(--bg); border: 1px solid var(--line); border-radius: 14px; }
+.tabla { width: 100%; border-collapse: collapse; font-size: 14px; }
+.tabla th { text-align: left; font: 500 10.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dim);
+  padding: 10px 12px; background: var(--bg2); border-bottom: 1px solid var(--line2); white-space: nowrap; }
+.tabla th.num { text-align: right; }
+.tabla td { padding: 10px 12px; border-bottom: 1px solid var(--line); }
+.tabla td.min { background: var(--accent-soft); color: var(--accent-ink); font-weight: 500; }
+.tabla tfoot th { font: 500 14px var(--mono); letter-spacing: 0; text-transform: none; color: var(--ink); border-top: 1px solid var(--line2); border-bottom: 0; }
+.source { font: 12px var(--mono); color: var(--muted); border-top: 1px dashed var(--line2); padding-top: 8px; }
