@@ -4,7 +4,7 @@
 
 Arma una canasta y mira en qué supermercado de Chile sale más barata, con la API de [Pricto](https://pricto.dev): el precio de cada producto en cada tienda, el total por tienda y cuánto cuesta si compras cada producto donde está más barato. Una página estática y dos funciones en TypeScript, sin dependencias en producción.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FMarceloFarrMintii%2Fsupermarket-comparator)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FPricto%2Fsupermarket-comparator)
 
 ![Comparador con siete productos en tres supermercados y la canasta más barata destacada](docs/comparator-es.png)
 
@@ -13,7 +13,7 @@ Arma una canasta y mira en qué supermercado de Chile sale más barata, con la A
 Requiere Node 22 o superior. No necesitas cuenta: sin `PRICTO_API_KEY`, usa la sandbox pública (`sk_test_sandbox`), que responde con datos de ejemplo.
 
 ```bash
-git clone https://github.com/MarceloFarrMintii/supermarket-comparator && cd supermarket-comparator
+git clone https://github.com/Pricto/supermarket-comparator && cd supermarket-comparator
 npm install && npm start      # http://localhost:3000
 ```
 
@@ -26,7 +26,7 @@ El botón de arriba clona el repo en tu cuenta y lo despliega. Funciona sin conf
 | Variable | Para qué | Por omisión |
 |---|---|---|
 | `PRICTO_API_KEY` | Tu API key. Vive solo en el servidor: el navegador nunca la ve. | `sk_test_sandbox` (datos de ejemplo) |
-| `PRICTO_API_URL` | Otra instancia de la API | `https://mercali-platform.vercel.app` |
+| `PRICTO_API_URL` | Otra instancia de la API | `https://pricto.dev` |
 | `PORT` | Puerto del servidor local | `3000` |
 
 ## Cómo funciona

@@ -1,7 +1,7 @@
 // Llama a la API de Pricto desde el servidor, para que la key nunca llegue al navegador.
 
 export const SANDBOX_KEY = "sk_test_sandbox";
-const DEFAULT_URL = "https://mercali-platform.vercel.app";
+const DEFAULT_URL = "https://pricto.dev";
 
 export async function callApi(path: string, init: RequestInit = {}): Promise<Response> {
   const base = (process.env.PRICTO_API_URL || DEFAULT_URL).replace(/\/$/, "");
