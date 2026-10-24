@@ -2,7 +2,7 @@
 
 const TEXT = {
   es: {
-    eyebrow: "Ejemplo · API de precios del retail",
+    eyebrow: "Ejemplo · API de Pricto",
     title: "¿En qué supermercado sale más barata tu canasta?",
     lede: "Arma tu canasta y compara el precio de cada producto y el total en cada supermercado.",
     basket: "Tu canasta",
@@ -21,7 +21,7 @@ const TEXT = {
     price_note: "Precio normal, el que paga cualquiera: sin precio con tarjeta de la tienda ni promociones por cantidad.",
   },
   en: {
-    eyebrow: "Example · Retail price API",
+    eyebrow: "Example · Pricto API",
     title: "Which supermarket has your basket cheapest?",
     lede: "Build your basket and compare the price of every item and the total at each supermarket.",
     basket: "Your basket",

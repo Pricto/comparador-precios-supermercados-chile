@@ -1,7 +1,7 @@
 {
   "name": "supermarket-comparator",
   "version": "0.1.0",
-  "description": "Which supermarket has your basket cheapest? A small web app on a retail price data API.",
+  "description": "Which supermarket has your basket cheapest? A small web app on the Pricto API.",
   "license": "MIT",
   "private": true,
   "type": "module",

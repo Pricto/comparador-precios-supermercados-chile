@@ -1,12 +1,12 @@
-// Llama a la API de precios desde el servidor, para que la key nunca llegue al navegador.
+// Llama a la API de Pricto desde el servidor, para que la key nunca llegue al navegador.
 
 export const SANDBOX_KEY = "sk_test_sandbox";
 const DEFAULT_URL = "https://mercali-platform.vercel.app";
 
 export async function callApi(path: string, init: RequestInit = {}): Promise<Response> {
-  const base = (process.env.PRICES_API_URL || DEFAULT_URL).replace(/\/$/, "");
+  const base = (process.env.PRICTO_API_URL || DEFAULT_URL).replace(/\/$/, "");
   const headers = {
-    Authorization: `Bearer ${process.env.PRICES_API_KEY || SANDBOX_KEY}`,
+    Authorization: `Bearer ${process.env.PRICTO_API_KEY || SANDBOX_KEY}`,
     "Content-Type": "application/json",
     "User-Agent": "supermarket-comparator-example/0.1",
   };

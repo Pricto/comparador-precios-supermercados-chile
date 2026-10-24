@@ -2,7 +2,7 @@
 
 English · [Español](README.md)
 
-Build a basket and see which Chilean supermarket has it cheapest: the price of every item at every store, the total per store and what it costs if you buy each item where it is cheapest. One static page and two TypeScript functions, no production dependencies.
+Build a basket and see which Chilean supermarket has it cheapest, with the [Pricto](https://pricto.dev) API: the price of every item at every store, the total per store and what it costs if you buy each item where it is cheapest. One static page and two TypeScript functions, no production dependencies.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FMarceloFarrMintii%2Fsupermarket-comparator)
 
@@ -10,7 +10,7 @@ Build a basket and see which Chilean supermarket has it cheapest: the price of e
 
 ## Run it locally
 
-Needs Node 22 or later. No account needed: without `PRICES_API_KEY` it uses the public sandbox (`sk_test_sandbox`), which answers with sample data.
+Needs Node 22 or later. No account needed: without `PRICTO_API_KEY` it uses the public sandbox (`sk_test_sandbox`), which answers with sample data.
 
 ```bash
 git clone https://github.com/MarceloFarrMintii/supermarket-comparator && cd supermarket-comparator
@@ -21,12 +21,12 @@ On first load it builds a starter basket (milk, rice, oil, pasta, coffee, toilet
 
 ## Deploy to Vercel
 
-The button above clones the repo into your account and deploys it. It works with no settings (on the sandbox); for real data, add `PRICES_API_KEY` under Project → Settings → Environment Variables and redeploy.
+The button above clones the repo into your account and deploys it. It works with no settings (on the sandbox); for real data, add `PRICTO_API_KEY` under Project → Settings → Environment Variables and redeploy.
 
 | Variable | What for | Default |
 |---|---|---|
-| `PRICES_API_KEY` | Your API key. It stays on the server: the browser never sees it. | `sk_test_sandbox` (sample data) |
-| `PRICES_API_URL` | Another API instance | `https://mercali-platform.vercel.app` |
+| `PRICTO_API_KEY` | Your API key. It stays on the server: the browser never sees it. | `sk_test_sandbox` (sample data) |
+| `PRICTO_API_URL` | Another API instance | `https://mercali-platform.vercel.app` |
 | `PORT` | Local server port | `3000` |
 
 ## How it works
@@ -55,7 +55,7 @@ npm test
 npm run typecheck
 ```
 
-`PRICES_API_URL=http://localhost:8787 npm test` runs them against a local instance.
+`PRICTO_API_URL=http://localhost:8787 npm test` runs them against a local instance.
 
 ## License
 
