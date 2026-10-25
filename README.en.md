@@ -1,23 +1,34 @@
-# supermarket-comparator
+# Chile supermarket price comparison
 
-English · [Español](README.md)
+[![Tests](https://github.com/Pricto/comparador-precios-supermercados-chile/actions/workflows/tests.yml/badge.svg)](https://github.com/Pricto/comparador-precios-supermercados-chile/actions/workflows/tests.yml)
+[![MIT license](https://img.shields.io/badge/license-MIT-0f5a45.svg)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Node%2022-0f5a45.svg)](package.json)
+[![Data: Pricto API](https://img.shields.io/badge/data-Pricto%20API-b0401f.svg)](https://pricto.dev)
 
-Build a basket and see which Chilean supermarket has it cheapest, with the [Pricto](https://pricto.dev) API: the price of every item at every store, the total per store and what it costs if you buy each item where it is cheapest. One static page and two TypeScript functions, no production dependencies.
+Build a basket and see which Chilean supermarket has it cheapest, with the [Pricto](https://pricto.dev) supermarket price API: the price of every item at Jumbo, Unimarc, Santa Isabel and the other supermarkets covered, the total per store and what it costs if you buy each item where it is cheapest. One static page and two TypeScript functions, no production dependencies.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FPricto%2Fsupermarket-comparator)
+[Español](README.md) · [API docs](https://pricto.dev/docs) · [Coverage](https://pricto.dev/cobertura) · [Create a free account](https://pricto.dev/registro)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FPricto%2Fcomparador-precios-supermercados-chile)
 
 ![Comparator with seven items at three supermarkets and the cheapest basket highlighted](docs/comparator-en.png)
 
 ## Run it locally
 
-Needs Node 22 or later. No account needed: without `PRICTO_API_KEY` it uses the public sandbox (`sk_test_sandbox`), which answers with sample data.
+Needs Node 22 or later. No account needed: without `PRICTO_API_KEY` it uses Pricto's public sandbox (`sk_test_sandbox`), which answers with sample data.
 
 ```bash
-git clone https://github.com/Pricto/supermarket-comparator && cd supermarket-comparator
+git clone https://github.com/Pricto/comparador-precios-supermercados-chile && cd comparador-precios-supermercados-chile
 npm install && npm start      # http://localhost:3000
 ```
 
 On first load it builds a starter basket (milk, rice, oil, pasta, coffee, toilet paper and detergent) by searching for each item by text, so it works the same with the sandbox and with real data. The basket is kept in the browser.
+
+## Which supermarkets it compares
+
+The ones returned by `GET /v1/retailers?segment=supermarket`: the list is not hard-coded, so a new chain shows up on its own. [pricto.dev/cobertura](https://pricto.dev/cobertura) lists as supermarkets captured daily (source registry as of 2026-10-24) Jumbo, Santa Isabel, Unimarc, Alvi, Mayorista Nacional, Supermercado La Herradura, Supermercados José González, Alimentika, Compras Aqui and Distribuidora Fermarket.
+
+It does not compare Lider, Tottus, Superbodega aCuenta or Central Mayorista: they block bots that identify themselves or don't respond. The sandbox has made-up data for Jumbo, Santa Isabel and Unimarc; real prices need a [free account](https://pricto.dev/registro).
 
 ## Deploy to Vercel
 
@@ -25,7 +36,7 @@ The button above clones the repo into your account and deploys it. It works with
 
 | Variable | What for | Default |
 |---|---|---|
-| `PRICTO_API_KEY` | Your API key. It stays on the server: the browser never sees it. | `sk_test_sandbox` (sample data) |
+| `PRICTO_API_KEY` | Your API key ([create a free account](https://pricto.dev/registro)). It stays on the server: the browser never sees it. | `sk_test_sandbox` (sample data) |
 | `PRICTO_API_URL` | Another API instance | `https://pricto.dev` |
 | `PORT` | Local server port | `3000` |
 
@@ -40,11 +51,33 @@ lib/api.ts       adds the key, retries 429s per Retry-After and passes errors th
 server.ts        local server with the same handlers Vercel runs in api/
 ```
 
-`POST /v1/prices/compare` does most of the work: it returns the price of each item at each store and the total per store, complete baskets first and the cheapest on top. The page only computes the split basket (each item where it is cheapest) and highlights the lowest price in every row.
+[`POST /v1/prices/compare`](https://pricto.dev/docs/api/compare-prices) does most of the work: it returns the price of each item at each store and the total per store, complete baskets first and the cheapest on top. The page only computes the split basket (each item where it is cheapest) and highlights the lowest price in every row.
+
+```bash
+curl -X POST https://pricto.dev/v1/prices/compare \
+  -H "Authorization: Bearer sk_test_sandbox" -H "Content-Type: application/json" \
+  -d '{"items":[{"product_id":"prd_01colu","quantity":2},{"product_id":"prd_09mira"}],
+       "retailers":["cl-jumbo","cl-santaisabel","cl-unimarc"]}'
+```
 
 Prices are `price`, what anyone pays. The API also returns the store-card price (`card_price`, which `compare` can total with `price_type: "card_price"`) and multi-buy promotions; this example doesn't use them.
 
-What it costs with a real key: 1 credit per price in the matrix (item × store with data) and 1 per search; repeating the same query within 24 hours is free. Every response reports the charge in `meta.credits_charged`.
+What it costs with a real key: 1 credit per price in the matrix (item × store with data) and 1 per search; repeating the same query within 24 hours is free. Every response reports the charge in `meta.credits_charged`. Plans at [pricto.dev/precios](https://pricto.dev/precios).
+
+## Ask your agent
+
+The same comparison is on Pricto's MCP server (`compare_prices`), so an agent can do it without code. Connect it to the sandbox, no login:
+
+```bash
+claude mcp add --transport http pricto https://pricto.dev/mcp/sandbox
+```
+
+Other clients (Cursor, VS Code, ChatGPT, claude.ai) at [pricto.dev/docs/mcp](https://pricto.dev/docs/mcp). Questions it answers with the sandbox data:
+
+- Which supermarket has this list cheapest: 2 Colun whole milk 1 L, Miraflores rice 1 kg, Chef oil 1 L and Nescafé Tradición coffee 170 g?
+- Compare the price of Confort toilet paper 12 rolls at Jumbo, Unimarc and Santa Isabel.
+- How much do I save if I buy each item on this list where it is cheapest instead of all at one supermarket?
+- Which supermarkets does Pricto have and since when is there history?
 
 ## Tests
 
@@ -56,6 +89,26 @@ npm run typecheck
 ```
 
 `PRICTO_API_URL=http://localhost:8787 npm test` runs them against a local instance.
+
+## FAQ
+
+**How do I compare prices at Jumbo, Unimarc and Santa Isabel?**
+Run this comparator (`npm install && npm start`) or call `POST /v1/prices/compare` on the Pricto API with your list: it returns the price of each item at each supermarket and the total per store.
+
+**Is there a supermarket price API for Chile?**
+Yes. [Pricto](https://pricto.dev) serves Chilean supermarket and pharmacy prices over a REST API and MCP, with the same product matched across chains and the time and URL of every price. It has a public sandbox to try it without an account.
+
+**Does it include Lider and Tottus?**
+No: they block bots that identify themselves. If a chain provides a feed or permission, it comes into coverage. Details at [pricto.dev/cobertura](https://pricto.dev/cobertura).
+
+**Are these in-store or website prices?**
+Website prices: the public online price of each chain, captured daily.
+
+**Are sandbox prices real?**
+No: it is sample data with real store and brand names. With a free account (100 credits a month, no card) you get real prices.
+
+**Can I publish it as my own app?**
+Yes, it is MIT. With real data, keep the key on the server (as this example does) and show the source line the API returns (`meta.attribution.text`), with the store and time of every price.
 
 ## License
 

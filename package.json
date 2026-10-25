@@ -1,11 +1,34 @@
 {
   "name": "supermarket-comparator",
   "version": "0.1.0",
-  "description": "Which supermarket has your basket cheapest? A small web app on the Pricto API.",
+  "description": "Comparador de precios de supermercados de Chile (Jumbo, Unimarc, Santa Isabel) con la API de Pricto: arma una canasta y ve la tienda más barata.",
+  "keywords": [
+    "comparador-de-precios",
+    "supermercados",
+    "chile",
+    "api",
+    "price-comparison",
+    "supermarket-prices",
+    "jumbo",
+    "unimarc",
+    "santa-isabel",
+    "pricto",
+    "vercel"
+  ],
+  "homepage": "https://pricto.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pricto/comparador-precios-supermercados-chile.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Pricto/comparador-precios-supermercados-chile/issues"
+  },
   "license": "MIT",
   "private": true,
   "type": "module",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "start": "node --import tsx server.ts",
     "test": "node --import tsx --test test/*.test.ts",
